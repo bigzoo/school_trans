@@ -17,6 +17,9 @@ class CreateSchools extends Migration
           $table->string('name');
           $table->string('email')->unique();
           $table->string('magic_word')->unique();
+          $table->string('password')->default('');
+          $table->boolean('active')->default(false);
+          $table->rememberToken();
           $table->timestamps();
       });
     }
