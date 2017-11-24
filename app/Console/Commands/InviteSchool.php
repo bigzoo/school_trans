@@ -45,28 +45,24 @@ class InviteSchool extends Command
       // Pluck variables from submited data and generate a maigic string
       $name  = $this->argument('name');
       $email = $this->argument('email');
-      $magic_word = substr(md5(mt_rand()), 0, 25);
 
       // Create the school
-      $school = $this->create([
+      $this->info("Creating the '$name' school.");
+      $school = School::create([
         'name' => $name,
         'email' => $email,
-        'magic_word' => $magic_word
+        'magic_word' => School::magic_word(),
       ]);
+      $this->info("School created successfully.");
+
 
       // Send the school email invitation
-      $this->info("Sending invite email to '$name'");
+      $this->info("Sending invite email to '$name'.");
       Mail::to($email)->send(new InviteSchoolMail($school));
 
       // Give information
       $this->info("Email sent to '$name' successfully.");
     }
 
-    protected function create(array $data){
-      return  School::create([
-        'name' => $data['name'],
-        'email' => $data['email'],
-        'magic_word' => $data['magic_word']
-      ]);
-    }
+
 }
