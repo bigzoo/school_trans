@@ -176,6 +176,10 @@ return [
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
+//        Added Passport as a service provider as it will be used for api authentication.
+        Laravel\Passport\PassportServiceProvider::class,
+//        Added Optimus API Consumer library to application service providers
+        Optimus\ApiConsumer\Provider\LaravelServiceProvider::class,
 
     ],
 
